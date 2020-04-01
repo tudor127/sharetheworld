@@ -1,4 +1,4 @@
-# Copyright 2018 Google Inc. All Rights Reserved.
+# Copyright 2017 Google Inc. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,13 +12,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import pytest
+import requests
+import six
+
 import main
 
+TEST_PHOTO_URL = (
+    'https://upload.wikimedia.org/wikipedia/commons/5/5e/'
+    'John_F._Kennedy%2C_White_House_photo_portrait%2C_looking_up.jpg')
 
-def test_index():
+
+@pytest.fixture
+def app():
     main.app.testing = True
     client = main.app.test_client()
+    return client
 
-    r = client.get('/')
+
+def test_index(app):
+    r = app.get('/')
     assert r.status_code == 200
-    assert 'Hello World' in r.data.decode('utf-8')
+
+
+def test_upload_photo(app):
+    test_photo_data = requests.get(TEST_PHOTO_URL).content
+
+    r = app.post(
+        '/upload_photo',
+        data={
+            'file': (six.BytesIO(test_photo_data), 'flex_and_vision.jpg')
+        }
+    )
+
+    assert r.status_code == 302
