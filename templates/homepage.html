@@ -1,21 +1,60 @@
-
-
 <html>
-  <body style="background:blue">
-      <h1>Google Cloud Platform - Face Detection Sample</h1>
+<head>
+<style type="text/css">
+* {
+    color: #777;
+}
 
-<p>This Python Flask application demonstrates App Engine Flexible, Google Cloud
-Storage, Datastore, and the Cloud Vision API.</p>
+p{
+   font-size:18px;
+}
 
-<br>
-    <form action="upload_photo" method="POST" enctype="multipart/form-data">
-      Upload File: <input type="file" name="file"><br>
-      <input type="submit" name="submit" value="Submit">
-    </form>
-    {% for image_entity in image_entities %}
-      <img src="{{image_entity['image_public_url']}}" width=200 height=200>
-      <p>{{image_entity['blob_name']}} was uploaded {{image_entity['timestamp']}}.</p>
-      <p>Joy Likelihood for Face: {{image_entity['joy']}}</p>
+nav{
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    position:fixed;
+    top:0px;
+    left:0px;
+}
+body{
+    background:#f5f5f5;
+}
+
+.feed{
+    width:800px;
+    height:auto;
+    display:flex;
+    min-height:50px;
+    margin:0px auto;
+    margin-top:60px;
+}
+
+</style>
+<title>Share The World</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main-style.css') }}">
+</head>
+<body>
+<nav>
+  <div class="logo" style="line-height:35px;font-size:23px">Share The World</div>
+  <div class="menuButtons">
+      <a href="/logout"><button class="logoutBtn">Logout</button></a>
+      <button class="logoutBtn">New Post</button>
+      <span style="color:#fff;float:right;margin-top:5px;margin-right:15px">Welcome, {{username}}!</span>
+  </div>
+</nav>
+<div class="feed">
+<p>No post yet</p>
+</div>
+<form method="post" action="/addpost" enctype="multipart/form-data">
+<textarea placeholder="description" name="description"></textarea>
+<input type="file" name="file">
+<input type="submit" value="submit">
+</form>
+    {% for post in posts %}
+      <img src="{{post['image_url']}}" width=200 height=200 title="{{post['image_name']}}">
+      <p>Date added: {{post['date_added']}}</p>
+      <p>Description: {{post['description']}}</p>
+      <p>Labels: {{post['labels']}}</p>
     {% endfor %}
-  </body>
+</body>
 </html> 

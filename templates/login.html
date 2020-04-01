@@ -1,0 +1,99 @@
+<html>
+<head>
+<style type="text/css">
+* {
+    color: #777;
+}
+
+p{
+    font-size:18px;
+}
+
+nav{
+    padding-top:5px !important;
+    padding-bottom:5px !important;
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:5;
+}
+body{
+    background:#f5f5f5;
+}
+
+.custom-input{
+    width:90%;
+    margin:0px auto;
+    border-radius:8px;
+    padding:10px 15px;
+    font-size:18px;
+    border:1px solid #aaa;
+    display:block;
+}
+
+.custom-button{
+    width:90%;
+    margin:0px auto;
+    border-radius:8px;
+    padding:10px 15px;
+    background:#f2b76b;
+    color:#555;
+    font-size:18px;
+    border:0px;
+    display:block;
+    cursor:pointer;
+}
+
+.panel{
+    width:350px;
+    height:430px;
+    background:#fff;
+    margin:0px auto;
+    margin-top:130px;
+    border-radius:20px;
+    padding:15px;
+}
+
+</style>
+<title>Share The World</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main-style.css') }}">
+</head>
+<body>
+<nav>
+  <div class="logo" style="line-height:35px;font-size:23px">Share The World</div>
+</nav>
+
+<div class="panel" id="login">
+<form method="post" action="/login">
+    <h1 style="text-align:center">Login</h1><br>
+    <input type="text" name="email" class="custom-input" placeholder="Email address"/><br>
+    <input type="password" name="password" class="custom-input"  placeholder="Password"/><br>
+    <input type="submit" value="Submit" class="custom-button"><br>
+    <p style="text-align:center">Don't have an account?</p>
+    <input type="button" value="Register" onclick="showRegister()" class="custom-button" style="background:#1debb1">
+</form>
+</div>
+
+<div class="panel" id="register" style="display:none">
+<form method="post" action="/register">
+    <h1 style="text-align:center">Register</h1><br>
+    <input type="text" name="email" class="custom-input" placeholder="Email address"/><br>
+    <input type="text" name="username" class="custom-input" placeholder="username"/><br>
+    <input type="submit" value="Submit" class="custom-button"><br>
+    <p style="text-align:center">Already have an account?</p>
+    <input type="button" onclick="showLogin()" value="Login" class="custom-button" style="background:#1debb1">
+</form>
+
+</div>
+<script type="text/javascript">
+function showLogin(){
+    document.getElementById('login').style.display = 'block';
+    document.getElementById('register').style.display = 'none';
+}
+function showRegister(){
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('register').style.display = 'block';
+}
+</script>
+</body>
+</html> 

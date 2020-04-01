@@ -1,0 +1,32 @@
+nav{
+    background:#1699c4;
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    display: flex;
+    height: auto;
+}
+
+.logo{
+    color:#fff;
+    width:40%;
+    float: left;
+    font-size: 26px;
+}
+
+.menuButtons{
+    padding: 5px;
+    width: 60%;
+    float: left;
+}
+
+.menuButtons button{
+    float: right;
+    padding: 5px 10px;
+    margin-right: 15px;
+}
+
+html,body{
+    margin: 0px;
+    padding: 0px;
+}
