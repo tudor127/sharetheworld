@@ -46,7 +46,7 @@ body{
 
 .panel{
     width:350px;
-    height:430px;
+    height:280px;
     background:#fff;
     margin:0px auto;
     margin-top:130px;
@@ -57,6 +57,44 @@ body{
 </style>
 <title>Share The World</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main-style.css') }}">
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-analytics.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-auth.js"></script>
+
+<script type="text/javascript">
+// Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBTKPNxbl7Scjy1GQARXo04DB0KJiUnNyE",
+    authDomain: "sharetheworld.firebaseapp.com",
+    databaseURL: "https://sharetheworld.firebaseio.com",
+    projectId: "sharetheworld",
+    storageBucket: "sharetheworld.appspot.com",
+    messagingSenderId: "455358987426",
+    appId: "1:455358987426:web:acec6b6bef620c3b32ebfb",
+    measurementId: "G-Y1S6LV347K"
+  };
+
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+googleSingIn=()=>{
+var provider = new firebase.auth.GoogleAuthProvider();
+firebase.auth().signInWithPopup(provider).then(function(result){
+document.getElementById('email').value = result.user.email;
+document.getElementById('displayName').value = result.user.displayName;
+document.getElementById('loginForm').submit();
+}).catch(function(err)
+{
+    console.log("Fail");
+})
+}
+
+</script>
 </head>
 <body>
 <nav>
@@ -64,14 +102,14 @@ body{
 </nav>
 
 <div class="panel" id="login">
-<form method="post" action="/login">
-    <h1 style="text-align:center">Login</h1><br>
-    <input type="text" name="email" class="custom-input" placeholder="Email address"/><br>
-    <input type="password" name="password" class="custom-input"  placeholder="Password"/><br>
-    <input type="submit" value="Submit" class="custom-button"><br>
-    <p style="text-align:center">Don't have an account?</p>
-    <input type="button" value="Register" onclick="showRegister()" class="custom-button" style="background:#1debb1">
+<form method="post" action="/login" id="loginForm">
+<input type="hidden" name="email" id="email">
+<input type="hidden" name="displayName" id="displayName">
 </form>
+    <h1 style="text-align:center">Login</h1><br>
+    <button onclick="googleSingIn()" class="custom-button">Login with Google</button><br>
+    <p style="text-align:center">No registration needed.</p><br>
+    <!-- <input type="button" value="Register" onclick="showRegister()" class="custom-button" style="background:#1debb1"> -->
 </div>
 
 <div class="panel" id="register" style="display:none">
