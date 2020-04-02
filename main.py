@@ -3,7 +3,6 @@ from datetime import datetime
 import logging
 import os
 import json
-
 from flask import Flask, redirect, render_template, request, session
 
 from google.cloud import datastore
@@ -13,9 +12,7 @@ from google.cloud.vision import types
 
 CLOUD_STORAGE_BUCKET = os.environ.get('CLOUD_STORAGE_BUCKET')
 
-
 app = Flask(__name__)
-
 
 @app.route('/')
 def homepage():
@@ -40,6 +37,7 @@ def homepage():
                     labels.append(value)
             post1['labels'] = labels
             posts1.append(post1)
+
         return render_template('homepage.html',username=session['username'],posts=posts1)
     else:
         return render_template('login.html')
