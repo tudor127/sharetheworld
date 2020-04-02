@@ -4,4 +4,4 @@ gunicorn==19.10.0; python_version < '3.0'
 google-cloud-vision==0.42.0
 google-cloud-storage==1.26.0
 google-cloud-datastore==1.11.0
-firebase==7.16.2
+
